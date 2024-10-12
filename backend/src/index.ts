@@ -7,7 +7,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 80;
 const oneDayInMs = 24 * 60 * 60 * 1000;
-const maxRequests = 5;
+const maxRequests = 100;
 let requestCount = 0;
 
 app.use(express.json());
