@@ -5,12 +5,12 @@ import axios from 'axios';
 
 export const summarizeYTVideo = async (req: Request, res: Response) => {
     try {
-        const { videoId } = validateInput(req.body);
+        const { videoUrl } = validateInput(req.body);
 
         let transcriptResult;
         try {
             transcriptResult = await axios.post('https://api.kome.ai/api/tools/youtube-transcripts', {
-                "video_id": `https://youtu.be/${videoId}`,
+                "video_id": videoUrl,
                 "format": true
             });
         } catch (error) {
@@ -57,12 +57,13 @@ const handleError = (error: unknown, res: Response) => {
         return res.status(400).json({ error: error.message });
     }
 
+        console.log(error)
     return res.status(500).json({ error: 'Internal server error' });
 }
 
 const validateInput = (input: unknown) => {
     const schema = Joi.object({
-        videoId: Joi.string().length(11).required()
+        videoUrl: Joi.string().uri({ scheme: ['https'] }).required(),
     });
 
     const { value, error } = schema.validate(input);
