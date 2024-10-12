@@ -23,10 +23,12 @@ export const summarizeYTVideo = async (req: Request, res: Response) => {
 
 const handleError = (error: unknown, res: Response) => {
     if (error instanceof Joi.ValidationError) {
+        console.log(error)
         return res.status(400).json({error: error.message});
     }
 
     if (error instanceof YoutubeTranscriptError) {
+        console.log(error)
         return res.status(404).json({error: 'Could not find transcript for the video'});
     }
 
