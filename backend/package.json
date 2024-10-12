@@ -7,7 +7,12 @@
     "start:prod": "npm run build && node build/index.js",
     "build": "rimraf ./build && tsc"
   },
-  "keywords": ["summarize", "youtube", "transcript", "openai"],
+  "keywords": [
+    "summarize",
+    "youtube",
+    "transcript",
+    "openai"
+  ],
   "author": "Subahanumanth C <subahanu1999@gmail.com>",
   "license": "ISC",
   "description": "A backend server for summarizing youtube video using OpenAI",
@@ -25,6 +30,6 @@
     "express": "^4.21.0",
     "joi": "^17.13.3",
     "openai": "^4.67.2",
-    "youtube-transcript": "^1.2.1"
+    "youtubei.js": "^10.5.0"
   }
 }
