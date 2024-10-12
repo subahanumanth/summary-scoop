@@ -1,29 +1,40 @@
 import { Request, Response } from 'express';
 import Joi from 'joi';
 import { openai } from '../config/openAI';
-import { Innertube } from 'youtubei.js';
+import axios from 'axios';
 
 export const summarizeYTVideo = async (req: Request, res: Response) => {
     try {
         const { videoId } = validateInput(req.body);
 
-        let transcript;
+        let transcriptResult;
         try {
-            const youtube = await Innertube.create({
-                lang: 'en',
-                location: 'US',
-                retrieve_player: false,
+            transcriptResult = await axios.post('https://api.kome.ai/api/tools/youtube-transcripts', {
+                "video_id": `https://youtu.be/${videoId}`,
+                "format": true
             });
-            const info = await youtube.getInfo(videoId);
-            const transcriptData = await info.getTranscript();
-            transcript = transcriptData?.transcript?.content?.body?.initial_segments.map((segment) => segment.snippet.text).join(' ');
-            if (!transcript) {
-                throw new Error('Could not find transcript for the video');
-            }
         } catch (error) {
             return res.status(404).json({ error: 'Could not find transcript for the video' });
         }
-        return res.status(200).json({ message: 'Success', summary: transcript });
+
+        // let transcript;
+        // try {
+        //     const youtube = await Innertube.create({
+        //         lang: 'en',
+        //         location: 'US',
+        //         retrieve_player: false,
+        //     });
+        //     const info = await youtube.getInfo(videoId);
+        //     const transcriptData = await info.getTranscript();
+        //     transcript = transcriptData?.transcript?.content?.body?.initial_segments.map((segment) => segment.snippet.text).join(' ');
+        //     if (!transcript) {
+        //         throw new Error('Could not find transcript for the video');
+        //     }
+        // } catch (error) {
+        //     return res.status(404).json({ error: 'Could not find transcript for the video' });
+        // }
+        // return res.status(200).json({ message: 'Success', summary: '' });
+        return res.status(200).json({ message: 'Success', summary: transcriptResult.data.transcript });
 
         // const captions = await YoutubeTranscript.fetchTranscript(videoId, {lang: ''});
         // console.log(captions, 'captions');
