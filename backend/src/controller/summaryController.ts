@@ -6,8 +6,11 @@ import { openai } from '../config/openAI';
 export const summarizeYTVideo = async (req: Request, res: Response) => {
     try {
         const { videoId } = validateInput(req.body);
+        console.log(videoId, 'video id');
         const captions = await YoutubeTranscript.fetchTranscript(videoId, {lang: ''});
+        console.log(captions, 'captions');
         const transcript = captions.map(caption => caption.text).join(' ');
+        console.log(transcript, 'transcript')
 
         // const response = await openai.chat.completions.create({
         //     messages: [{ role: 'user', content: `Summarize the following youtube video transcript: ${transcript}` }],
