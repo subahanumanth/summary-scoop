@@ -1,0 +1,30 @@
+{
+  "name": "summary-scoop-backend",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start:prod": "npm run build && node build/index.js",
+    "build": "rimraf ./build && tsc"
+  },
+  "keywords": ["summarize", "youtube", "transcript", "openai"],
+  "author": "Subahanumanth C <subahanu1999@gmail.com>",
+  "license": "ISC",
+  "description": "A backend server for summarizing youtube video using OpenAI",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "nodemon": "^3.1.7",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "joi": "^17.13.3",
+    "openai": "^4.67.2",
+    "youtube-transcript": "^1.2.1"
+  }
+}
