@@ -32,10 +32,11 @@ export const summarizeYTVideo = async (req: Request, res: Response) => {
       ],
       model: "gpt-3.5-turbo-0125",
     });
+    const summary = response.choices[0].message.content ?? "No summary found";
 
     return res.status(200).json({
       message: "Success",
-      summary: response.choices[0].message.content,
+      summary: summary[0].toUpperCase() + summary.slice(1),
     });
   } catch (error: unknown) {
     return handleError(error, res);
