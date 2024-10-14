@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Express, NextFunction, Request, Response } from "express";
 import summaryRoutes from "./routes/summaryRoute";
@@ -12,6 +13,12 @@ let requestCount = 0;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "https://summary-scoop.onrender.com",
+    methods: ["POST"],
+  })
+);
 app.use((req: Request, res: Response, next: NextFunction) => {
   requestCount++;
   if (requestCount > maxRequests) {
