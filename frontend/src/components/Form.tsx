@@ -1,9 +1,10 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import axios, { AxiosError } from "axios";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 const Form = () => {
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [summaryData, setSummaryData] = useState<string>("");
-  const [showSummary, setShowSummary] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -13,15 +14,26 @@ const Form = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
+    setSummaryData("");
+    setLoading(true);
 
     try {
-      setSummaryData(
-        "This is a long summary text to demonstrate how the text wraps within the summary section. Make sure to test with various lengths of text to see the wrapping behavior in actionThis is a long summary text to demonstrate how the text wraps within the summary section. Make sure to test with various lengths of text to see the wrapping behavior in action."
+      const response = await axios.post(
+        "https://api-summary-scoop.onrender.com/api/summarize",
+        { videoUrl }
       );
-      setShowSummary(true);
-    } catch (error) {
-      console.error("Error fetching summary:", error);
-      setError("Failed to fetch summary. Please try again later.");
+      setLoading(false);
+      setError("");
+      setSummaryData(response.data.summary);
+    } catch (error: unknown) {
+      setLoading(false);
+
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.error);
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
     }
   };
 
@@ -46,28 +58,27 @@ const Form = () => {
           value={videoUrl}
           onChange={handleInputChange}
           required
-          className="w-64 py-1 px-4 bg-white bg-opacity-10 backdrop-blur-md text-white text-lg rounded-md outline-none placeholder:text-gray-400 placeholder:opacity-70 placeholder:text-sm transition duration-300 border border-[#23243C]"
+          className="w-64 px-4 bg-white bg-opacity-10 backdrop-blur-md text-white rounded-md outline-none placeholder:text-gray-400 placeholder:opacity-70 placeholder:text-sm text-xs"
         />
         <button
           type="submit"
-          className="py-1 px-4 text-white font-semibold rounded-md bg-gradient-to-r from-[#C07EFF] via-[#FF729F] to-[#F5B867] shadow-lg transition-transform transform duration-200 hover:scale-105 focus:outline-none focus:ring-0"
+          className="py-1 px-4 text-white font-semibold rounded-md bg-gradient-to-r from-[#C07EFF] via-[#FF729F] to-[#F5B867] hover:scale-105 focus:outline-none"
+          disabled={loading}
         >
-          Summarize
+          {loading ? "Summarizing..." : "Summarize"}
         </button>
       </form>
 
       {error && <p className="mt-2 text-red-500 text-center">{error}</p>}
 
-      {showSummary && (
-        <div className="mt-12 bg-[#090A22] p-4 rounded-md text-white border border-[#23243C] flex flex-col justify-center">
-          <p className="text-lg mb-2 text-center break-words">
+      {summaryData && (
+        <div className="mt-12 bg-[#090A22] p-4 rounded-md text-white border border-[#23243C] justify-center">
+          <p className="text-lg mb-2 text-center">
             Your summary is ready! Here you go...
           </p>
-          <hr className="border-t border-[#23243C] mb-4 -mx-4" />
+          <hr className="border-t border-[#23243C] mb-4 mx-[-16px]" />
           <div className="max-h-64 overflow-y-auto custom-scrollbar text-left">
-            <p className="text-sm leading-6 text-[#d1d5db] break-words">
-              {summaryData}
-            </p>
+            <p className="text-sm text-[#d1d5db] break-words">{summaryData}</p>
           </div>
         </div>
       )}

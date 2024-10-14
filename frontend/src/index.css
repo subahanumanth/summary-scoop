@@ -2,6 +2,13 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.background-img {
+  background-image: url("/background.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 11px;
 }

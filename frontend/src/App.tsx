@@ -4,16 +4,8 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <div
-      className="bg-[#0d0d25] min-h-screen flex items-center justify-center"
-      style={{
-        backgroundImage: "url('/background.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
-    >
-      <div className="w-[900px] text-center px-4 py-12 rounded-lg">
+    <div className="flex items-center justify-center background-img">
+      <div className="w-[900px] text-center py-12">
         <Header />
         <Form />
         <Footer />
