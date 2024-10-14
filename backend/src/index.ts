@@ -13,12 +13,12 @@ let requestCount = 0;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["POST"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     methods: ["POST"],
+//   })
+// );
 app.use((req: Request, res: Response, next: NextFunction) => {
   requestCount++;
   if (requestCount > maxRequests) {
