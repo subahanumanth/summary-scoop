@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://summary-scoop.onrender.com",
+    origin: "http://localhost:5173",
     methods: ["POST"],
   })
 );
