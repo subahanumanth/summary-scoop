@@ -1,0 +1,17 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 11px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #23243c;
+  border-radius: 4px;
+  border: 2px solid #090a22;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #090a22;
+}
