@@ -11,11 +11,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-white hover:text-[#0077B5] transition duration-200"
         >
-          <img
-            src="../../public/linkedin.png"
-            alt="LinkedIn"
-            className="w-4 h-4"
-          />
+          <img src="/linkedin.png" alt="LinkedIn" className="w-4 h-4" />
         </a>
         <a
           href="https://github.com/subahanumanth"
@@ -23,7 +19,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-white hover:text-[#0077B5] transition duration-200"
         >
-          <img src="../../public/github.png" alt="GitHub" className="w-4 h-4" />
+          <img src="/github.png" alt="GitHub" className="w-4 h-4" />
         </a>
         <a
           href="mailto:subahanu1999@gmail.com"
@@ -31,7 +27,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-white hover:text-[#0077B5] transition duration-200"
         >
-          <img src="../../public/gmail.png" alt="Gmail" className="w-4 h-4" />
+          <img src="/gmail.png" alt="Gmail" className="w-4 h-4" />
         </a>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
-const SummaryApp = () => {
+const Form = () => {
   const [videoUrl, setVideoUrl] = useState<string>("");
   const [summaryData, setSummaryData] = useState<string>("");
   const [showSummary, setShowSummary] = useState<boolean>(false);
@@ -75,4 +75,4 @@ const SummaryApp = () => {
   );
 };
 
-export default SummaryApp;
+export default Form;

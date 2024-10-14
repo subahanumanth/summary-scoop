@@ -7,14 +7,13 @@ function App() {
     <div
       className="bg-[#0d0d25] min-h-screen flex items-center justify-center"
       style={{
-        backgroundImage: "url('../public/background.png')",
+        backgroundImage: "url('/background.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed", // Makes the background image fixed
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="w-[900px] text-center px-4 py-12 rounded-lg">
-        {/* This inner div can have a slight background to enhance readability */}
         <Header />
         <Form />
         <Footer />

@@ -1,7 +1,7 @@
 const Logo = () => {
   return (
     <div className="flex items-center space-x-1 mb-20">
-      <img src="../public/logo.png" alt="ice-cream" className="w-5 h-5" />
+      <img src="/logo.png" alt="ice-cream" className="w-5 h-5" />
       <i
         className="fas fa-ice-cream text-3xl bg-clip-text text-transparent
           bg-gradient-to-r from-[#C07EFF] via-[#FF729F] to-[#F5B867]"
