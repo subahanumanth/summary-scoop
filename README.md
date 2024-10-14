@@ -1,6 +1,4 @@
-# Summary Scoop
-
-![Summary Scoop Logo](docs/assets/logo.png)
+# Summary Scoop <img src="docs/assets/logo.png" alt="Summary Scoop Logo" width="30" height="30" />
 
 ### Live Demo: [Visit Summary Scoop](https://summary-scoop.onrender.com)
 
@@ -27,11 +25,11 @@
 
 ### 1. **Home Page**
 
-![Home Page](path_to_homepage_image)
+![Home Page](docs/assets//home.png)
 
 ### 2. **Summary Generation**
 
-![Summary Generation](path_to_summary_generation_image)
+![Summary Generation](docs/assets/summary.png)
 
 ## Technologies Used
 
