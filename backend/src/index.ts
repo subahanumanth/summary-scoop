@@ -10,12 +10,22 @@ const port = process.env.PORT || 80;
 const oneDayInMs = 24 * 60 * 60 * 1000;
 const maxRequests = 50;
 let requestCount = 0;
+const allowedOrigins = [
+  "https://summary-scoop.onrender.com",
+  "http://localhost:5173",
+];
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://summary-scoop.onrender.com",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["POST"],
   })
 );
@@ -32,7 +42,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use("/api", summaryRoutes);
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running`);
+  console.log(`[server]: Server is running on ${port}`);
 });
 
 const resetRequestCount = () => {
